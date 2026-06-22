@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ShoppingCart } from "lucide-react";
 import Box from "@/infra/components/Box";
 import Container from "@/infra/components/Container";
 import Flex from "@/infra/components/Flex";
@@ -30,6 +31,7 @@ export default function Header() {
               className="no-underline"
             >
               <Flex align="center" gap={1} className="text-gray-600 hover:text-gray-900">
+                <ShoppingCart className="h-4 w-4" strokeWidth={2} />
                 <Text variant="label" className="text-inherit">
                   Cart
                 </Text>

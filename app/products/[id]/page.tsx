@@ -1,3 +1,9 @@
+import { PackageX } from "lucide-react";
+import { serverFetch } from "@/infra/helpers/serverFetch";
+import ProductDetail from "./_components/ProductDetail";
+import ErrorState from "@/components/ErrorState";
+import { Product } from "@/types/product";
+
 export default async function ProductDetailPage({
   params,
 }: {
@@ -5,13 +11,15 @@ export default async function ProductDetailPage({
 }) {
   const { id } = await params;
 
-  return (
-    <div>
-      <h1 className="text-3xl font-bold text-gray-900">Product Detail</h1>
-      <p className="mt-2 text-gray-500">
-        Detail page for product ID: <strong>{id}</strong> — full product info
-        will be displayed here.
-      </p>
-    </div>
+  const { data, error } = await serverFetch<Product>(
+    `https://dummyjson.com/products/${id}`
   );
+
+  if (error) {
+    return (
+      <ErrorState icon={PackageX} title="Product not found" message={error} />
+    );
+  }
+
+  return <ProductDetail product={data!} />;
 }

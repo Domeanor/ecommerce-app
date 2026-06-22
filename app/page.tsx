@@ -3,6 +3,7 @@ import Box from "@/infra/components/Box";
 import Grid from "@/infra/components/Grid";
 import Text from "@/infra/components/Text";
 import ProductCard from "@/app/_components/ProductCard";
+import ErrorState from "@/components/ErrorState";
 import { Product } from "@/types/product";
 
 interface ProductsResponse {
@@ -16,7 +17,7 @@ export default async function HomePage() {
   );
 
   if (error) {
-    return <Text variant="body1" className="text-red-500">{error}</Text>;
+    return <ErrorState message={error} />;
   }
 
   return (

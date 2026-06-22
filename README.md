@@ -6,7 +6,8 @@ A simple e-commerce app built with Next.js App Router, TypeScript, and Tailwind 
 
 - Product listing with lazy-loaded images and shimmer skeletons
 - Product detail page
-- Cart with persistent state
+- Add to Cart action (UI only — see Known Limitations)
+- Loading states and error/not-found screens for every route
 - Responsive layout
 
 ## Running Locally
@@ -40,10 +41,13 @@ Types are defined inline where they're used and only promoted to `types/` when a
 ### Testing
 Tests are co-located next to their source files rather than in a global `__tests__` folder. Moving or deleting a module takes its test with it naturally, and it's immediately visible which modules have coverage.
 
+### Error and Loading States
+Two shared components, `ErrorState` and `LoadingState`, back every route's error and loading UI. Next.js's special route files (`loading.tsx`, `error.tsx`, `global-error.tsx`, `not-found.tsx`) wire them in automatically — `loading.tsx` wraps a route in Suspense, `error.tsx` catches unexpected exceptions, and `global-error.tsx` covers the rare case of the root layout itself throwing, which a regular `error.tsx` structurally can't reach. Expected errors (a failed fetch, an invalid product id) are handled separately as plain return values in the page itself, not thrown — they're normal outcomes, not bugs.
+
 ## Known Limitations
 
 - **No authentication** — the app is fully public with no user sessions.
-- **Cart is client-side only** — cart state lives in React Context and is not persisted to a server or localStorage across browser sessions.
-- **DummyJSON is read-only** — add to cart and checkout are UI-only; no real orders are placed.
+- **Cart has no state management yet** — the Add to Cart button and header cart count are placeholders (the button currently just logs a click); there is no Context, persistence, or real cart page content.
+- **DummyJSON is read-only** — even once cart state is wired up, checkout would be UI-only; no real orders are placed.
 - **No pagination** — the product list fetches a fixed set of 30 products. DummyJSON supports pagination but it is not wired up yet.
 - **No search or filtering** — products cannot be filtered by category or price.

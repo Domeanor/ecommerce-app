@@ -12,6 +12,13 @@ interface FlexProps extends HTMLAttributes<HTMLDivElement> {
   inline?: boolean;
 }
 
+const directionMap = {
+  row: "flex-row",
+  col: "flex-col",
+  "row-reverse": "flex-row-reverse",
+  "col-reverse": "flex-col-reverse",
+};
+
 const alignMap = {
   start: "items-start",
   center: "items-center",
@@ -27,6 +34,22 @@ const justifyMap = {
   between: "justify-between",
   around: "justify-around",
   evenly: "justify-evenly",
+};
+
+const gapMap: Record<Gap, string> = {
+  0: "gap-0",
+  1: "gap-1",
+  2: "gap-2",
+  3: "gap-3",
+  4: "gap-4",
+  5: "gap-5",
+  6: "gap-6",
+  8: "gap-8",
+  10: "gap-10",
+  12: "gap-12",
+  16: "gap-16",
+  20: "gap-20",
+  24: "gap-24",
 };
 
 const Flex = forwardRef<HTMLDivElement, FlexProps>(
@@ -48,11 +71,11 @@ const Flex = forwardRef<HTMLDivElement, FlexProps>(
         ref={ref}
         className={cn(
           inline ? "inline-flex" : "flex",
-          direction !== "row" && `flex-${direction}`,
+          direction !== "row" && directionMap[direction],
           align && alignMap[align],
           justify && justifyMap[justify],
           wrap && "flex-wrap",
-          gap !== undefined && `gap-${gap}`,
+          gap !== undefined && gapMap[gap],
           className
         )}
         {...props}

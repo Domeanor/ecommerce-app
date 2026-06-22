@@ -8,7 +8,7 @@ type LazyImageProps = Omit<ImageProps, "placeholder" | "onLoad" | "onError">;
 
 type Status = "loading" | "loaded" | "error";
 
-export default function LazyImage({ alt, className, ...props }: LazyImageProps) {
+export default function LazyImage({ alt, className, priority, ...props }: LazyImageProps) {
   const [status, setStatus] = useState<Status>("loading");
 
   return (
@@ -24,7 +24,8 @@ export default function LazyImage({ alt, className, ...props }: LazyImageProps) 
       <Image
         {...props}
         alt={alt}
-        loading="lazy"
+        priority={priority}
+        loading={priority ? undefined : "lazy"}
         onLoad={() => setStatus("loaded")}
         onError={() => setStatus("error")}
         className={cn(

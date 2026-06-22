@@ -14,6 +14,6 @@ Write tests for:
 - Helpers — return shape, error handling
 
 Skip tests for:
-- Page components — too coupled to data fetching and routing
+- Page components and Next.js route-convention files (`loading`, `error`, `global-error`, `not-found`) — too coupled to routing, data fetching, and error-boundary mechanics to test meaningfully
 - Pure layout and visual style
 - Anything already guaranteed by TypeScript types

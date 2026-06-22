@@ -16,5 +16,6 @@ Key principles:
 - Components have three layers: infra primitives → shared (`components/`) → route-private (`_components/`). The shared layer is empty until a component is needed by two or more pages. See `component-architecture.md`.
 - Types live inline; promote to `types/` only when shared across pages. See `type-placement.md`.
 - Server Components use `serverFetch`, Client Components use `useFetchQuery`. See `data-fetching.md`.
+- Error and loading screens use the shared `ErrorState`/`LoadingState` components via Next.js's route-convention files (`loading.tsx`, `error.tsx`, `global-error.tsx`, `not-found.tsx`). See `error-and-loading-states.md`.
 - Tests are co-located next to source files, not in a global folder. See `testing.md`.
 - No barrel `index.ts` files — import directly from the file path.
