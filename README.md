@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ShopNext
 
-## Getting Started
+A simple e-commerce app built with Next.js App Router, TypeScript, and Tailwind CSS. Products are sourced from the [DummyJSON API](https://dummyjson.com).
 
-First, run the development server:
+## Features
+
+- Product listing with lazy-loaded images and shimmer skeletons
+- Product detail page
+- Cart with persistent state
+- Responsive layout
+
+## Running Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm test        # run tests
+npm run lint    # run ESLint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Thought Process and Trade-offs
 
-## Learn More
+### Component Architecture
+The codebase uses three explicit layers: infrastructure primitives (`infra/components/`), shared page components (`components/`), and route-private components (`app/<route>/_components/`). This keeps domain-free UI building blocks separate from page-specific code and makes the intended scope of each component clear without needing comments.
 
-To learn more about Next.js, take a look at the following resources:
+### Data Fetching Split
+Server Components fetch with `serverFetch` (a plain async helper), Client Components use the `useFetchQuery` hook. The split is intentional — hooks can't run in Server Components, and using a Client Component for data that's known at request time would sacrifice server rendering, SEO, and initial load performance. The naming makes the distinction self-evident.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### No Barrel Exports
+Each import points directly to its file (`@/infra/components/Box`) rather than going through an `index.ts`. Barrel files hide what a module actually exports, slow down editors, and cause circular dependency issues as projects grow.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Type Placement
+Types are defined inline where they're used and only promoted to `types/` when a second file needs to import them. This avoids a global types folder that becomes a dumping ground for types of varying relevance.
 
-## Deploy on Vercel
+### Testing
+Tests are co-located next to their source files rather than in a global `__tests__` folder. Moving or deleting a module takes its test with it naturally, and it's immediately visible which modules have coverage.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Known Limitations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **No authentication** — the app is fully public with no user sessions.
+- **Cart is client-side only** — cart state lives in React Context and is not persisted to a server or localStorage across browser sessions.
+- **DummyJSON is read-only** — add to cart and checkout are UI-only; no real orders are placed.
+- **No pagination** — the product list fetches a fixed set of 30 products. DummyJSON supports pagination but it is not wired up yet.
+- **No search or filtering** — products cannot be filtered by category or price.

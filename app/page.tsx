@@ -1,10 +1,35 @@
-export default function HomePage() {
+import { serverFetch } from "@/infra/helpers/serverFetch";
+import Box from "@/infra/components/Box";
+import Grid from "@/infra/components/Grid";
+import Text from "@/infra/components/Text";
+import ProductCard from "@/app/_components/ProductCard";
+import { Product } from "@/types/product";
+
+interface ProductsResponse {
+  products: Product[];
+}
+
+export default async function HomePage() {
+  const { data, error } = await serverFetch<ProductsResponse>(
+    "https://dummyjson.com/products?limit=30",
+    { cache: "force-cache" }
+  );
+
+  if (error) {
+    return <Text variant="body1" className="text-red-500">{error}</Text>;
+  }
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-gray-900">Products</h1>
-      <p className="mt-2 text-gray-500">
-        Home page — product list will be displayed here.
-      </p>
-    </div>
+    <Box>
+      <Text variant="h2" className="mb-6">
+        Products
+      </Text>
+
+      <Grid cols={1} smCols={2} mdCols={3} lgCols={4} gap={6}>
+        {data!.products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </Grid>
+    </Box>
   );
 }

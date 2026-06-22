@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+import Header from "@/app/_components/Header";
+import Providers from "@/app/_components/Providers";
 
 const geist = Geist({ subsets: ["latin"] });
 
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={`${geist.className} min-h-full bg-gray-50 antialiased`}>
-        <Header />
-        <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
+        <Providers>
+          <Header />
+          <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
+        </Providers>
       </body>
     </html>
   );
