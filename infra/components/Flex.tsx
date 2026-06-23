@@ -3,14 +3,14 @@ import { cn } from "@/infra/helpers/cn";
 
 type Gap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | 20 | 24;
 
-interface FlexProps extends HTMLAttributes<HTMLDivElement> {
+type FlexProps = HTMLAttributes<HTMLDivElement> & {
   direction?: "row" | "col" | "row-reverse" | "col-reverse";
   align?: "start" | "center" | "end" | "stretch" | "baseline";
   justify?: "start" | "center" | "end" | "between" | "around" | "evenly";
   wrap?: boolean;
   gap?: Gap;
   inline?: boolean;
-}
+};
 
 const directionMap = {
   row: "flex-row",

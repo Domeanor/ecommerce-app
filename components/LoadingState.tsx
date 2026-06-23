@@ -2,9 +2,9 @@ import Box from "@/infra/components/Box";
 import Flex from "@/infra/components/Flex";
 import Text from "@/infra/components/Text";
 
-interface LoadingStateProps {
+type LoadingStateProps = {
   message?: string;
-}
+};
 
 export default function LoadingState({
   message = "Loading...",

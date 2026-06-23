@@ -3,13 +3,13 @@ import { cn } from "@/infra/helpers/cn";
 
 type ColCount = 1 | 2 | 3 | 4 | 5 | 6 | 12;
 
-interface GridProps extends HTMLAttributes<HTMLDivElement> {
+type GridProps = HTMLAttributes<HTMLDivElement> & {
   cols?: ColCount;
   smCols?: ColCount;
   mdCols?: ColCount;
   lgCols?: ColCount;
   gap?: number;
-}
+};
 
 const colClass = (prefix: string, count: ColCount) =>
   `${prefix}grid-cols-${count}`;

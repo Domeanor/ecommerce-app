@@ -1,7 +1,7 @@
-interface FetchResult<T> {
+type FetchResult<T> = {
   data: T | null;
   error: string | null;
-}
+};
 
 export async function serverFetch<T>(
   url: string,

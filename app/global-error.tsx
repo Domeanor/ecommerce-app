@@ -7,10 +7,10 @@ import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"] });
 
-interface GlobalErrorProps {
+type GlobalErrorProps = {
   error: Error & { digest?: string };
   unstable_retry: () => void;
-}
+};
 
 export default function GlobalError({ error, unstable_retry }: GlobalErrorProps) {
   useEffect(() => {

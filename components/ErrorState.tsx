@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { AlertTriangle, type LucideIcon } from "lucide-react";
+import Button from "@/infra/components/Button";
 import Flex from "@/infra/components/Flex";
 import Text from "@/infra/components/Text";
 
-interface ErrorStateProps {
+type ErrorStateProps = {
   icon?: LucideIcon;
   title?: string;
   message: string;
   digest?: string;
   onRetry?: () => void;
-}
+};
 
 export default function ErrorState({
   icon: Icon = AlertTriangle,
@@ -38,13 +39,9 @@ export default function ErrorState({
       )}
       <Flex align="center" gap={4} className="mt-2">
         {onRetry && (
-          <button
-            type="button"
-            onClick={onRetry}
-            className="text-sm font-medium text-gray-900 underline"
-          >
+          <Button variant="text" onClick={onRetry} className="text-sm font-medium">
             Try again
-          </button>
+          </Button>
         )}
         <Link href="/" className="text-sm font-medium text-gray-900 underline">
           ← Back to home

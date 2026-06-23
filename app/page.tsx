@@ -6,9 +6,9 @@ import ProductCard from "@/app/_components/ProductCard";
 import ErrorState from "@/components/ErrorState";
 import { Product } from "@/types/product";
 
-interface ProductsResponse {
+type ProductsResponse = {
   products: Product[];
-}
+};
 
 export default async function HomePage() {
   const { data, error } = await serverFetch<ProductsResponse>(

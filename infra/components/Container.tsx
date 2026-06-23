@@ -1,9 +1,9 @@
 import { forwardRef, HTMLAttributes } from "react";
 import { cn } from "@/infra/helpers/cn";
 
-interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
+type ContainerProps = HTMLAttributes<HTMLDivElement> & {
   maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
-}
+};
 
 const maxWidthMap = {
   sm: "max-w-2xl",

@@ -4,11 +4,11 @@ import Flex from "@/infra/components/Flex";
 import Text from "@/infra/components/Text";
 import LazyImage from "@/infra/components/LazyImage";
 import { Product } from "@/types/product";
-import AddToCartButton from "./AddToCartButton";
+import AddToCartControl from "@/components/AddToCartControl";
 
-interface ProductDetailProps {
+type ProductDetailProps = {
   product: Product;
-}
+};
 
 export default function ProductDetail({ product }: ProductDetailProps) {
   const discountedPrice = (
@@ -79,7 +79,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             {product.description}
           </Text>
 
-          <AddToCartButton />
+          <AddToCartControl product={product} />
         </Flex>
       </Flex>
     </Box>

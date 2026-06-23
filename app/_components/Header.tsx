@@ -1,11 +1,17 @@
+"use client";
+
+import { memo } from "react";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import Box from "@/infra/components/Box";
 import Container from "@/infra/components/Container";
 import Flex from "@/infra/components/Flex";
 import Text from "@/infra/components/Text";
+import { useCart } from "@/app/_components/CartProvider";
 
-export default function Header() {
+function Header() {
+  const { totalCount } = useCart();
+
   return (
     <Box
       as="header"
@@ -36,7 +42,7 @@ export default function Header() {
                   Cart
                 </Text>
                 <Box className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-900 text-xs text-white">
-                  0
+                  {totalCount}
                 </Box>
               </Flex>
             </Link>
@@ -47,3 +53,5 @@ export default function Header() {
     </Box>
   );
 }
+
+export default memo(Header);

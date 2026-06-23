@@ -3,10 +3,10 @@
 import { useEffect } from "react";
 import ErrorState from "@/components/ErrorState";
 
-interface ErrorPageProps {
+type ErrorPageProps = {
   error: Error & { digest?: string };
   unstable_retry: () => void;
-}
+};
 
 export default function Error({ error, unstable_retry }: ErrorPageProps) {
   useEffect(() => {
