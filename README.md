@@ -10,6 +10,24 @@ A simple e-commerce app built with Next.js App Router, TypeScript, and Tailwind 
 - Loading states and error/not-found screens for every route
 - Responsive layout
 
+## Requirements
+
+### Functional Requirements
+
+- **Home page (product list)** — fetch and display products from [DummyJSON](https://dummyjson.com/products). Each product card shows the image, title, price, and rating. Clicking a card navigates to that product's detail page. The list is paginated with number-based pagination (`?page=2`) rather than a single fixed batch.
+- **Product detail page** — dynamic route `/products/[id]` fetching a single product by id. Displays title, main image, description, price, discount percentage, and rating.
+- **Cart** — add a product to the cart, remove a product from the cart. The cart page shows the list of added products, total item count, and total price. Cart state persists within the session via React Context; it resets on a page refresh (see [Known Limitations](#known-limitations)).
+- **Navigation** — a header present on every page shows the site name and a cart icon with a live item count. Clear navigation exists between Home, Product Detail, and Cart.
+
+### Non-Functional Requirements
+
+- **Performance** — product data is fetched server-side (`serverFetch`) so pages render with content already in the initial HTML; product images lazy-load; the home page shows content-shaped skeletons while loading instead of a generic spinner, to avoid layout shift when real content arrives.
+- **Responsiveness** — the layout adapts across breakpoints (1 → 2 → 3 → 4 columns for the product grid) using the shared `Grid`/`Flex` primitives.
+- **Resilience** — every route has a loading state and an error state. Expected errors (a failed fetch, an invalid product id, an out-of-range page) render a dedicated message instead of a blank page or a crash; unexpected errors are caught by `error.tsx`/`global-error.tsx` boundaries.
+- **Maintainability** — a three-layer component architecture (`infra/components` → `components` → route-private `_components`), inline types promoted only when shared, no barrel exports, and co-located tests keep the codebase navigable as it grows.
+- **Testability** — components and hooks with real logic (branching, computed values) have unit tests living next to the source file; pure layout/visual components are intentionally left untested.
+- **Usability** — visual feedback for every interactive state (hover, disabled, active/current page, loading, empty cart) so the UI never feels unresponsive or ambiguous.
+
 ## Running Locally
 
 ```bash
