@@ -28,6 +28,11 @@ A simple e-commerce app built with Next.js App Router, TypeScript, and Tailwind 
 - **Testability** — components and hooks with real logic (branching, computed values) have unit tests living next to the source file; pure layout/visual components are intentionally left untested.
 - **Usability** — visual feedback for every interactive state (hover, disabled, active/current page, loading, empty cart) so the UI never feels unresponsive or ambiguous.
 
+## Video Recording
+
+https://drive.google.com/file/d/14Htl3EVM7lXUfYxGnst158T3ch8HvsNd/view?usp=sharing
+
+
 ## Running Locally
 
 ```bash
