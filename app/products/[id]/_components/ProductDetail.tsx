@@ -8,9 +8,13 @@ import AddToCartControl from "@/components/AddToCartControl";
 
 type ProductDetailProps = {
   product: Product;
+  backHref: string;
 };
 
-export default function ProductDetail({ product }: ProductDetailProps) {
+export default function ProductDetail({
+  product,
+  backHref,
+}: ProductDetailProps) {
   const discountedPrice = (
     product.price * (1 - product.discountPercentage / 100)
   ).toFixed(2);
@@ -18,7 +22,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   return (
     <Box>
       <Link
-        href="/"
+        href={backHref}
         className="mb-6 inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-900 no-underline"
       >
         ← Back to products

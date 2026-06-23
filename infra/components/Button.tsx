@@ -22,7 +22,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         className={cn(
-          "inline-flex items-center justify-center transition disabled:pointer-events-none disabled:opacity-50",
+          "inline-flex cursor-pointer items-center justify-center transition disabled:cursor-not-allowed disabled:pointer-events-none disabled:opacity-50",
           variantMap[variant],
           className
         )}

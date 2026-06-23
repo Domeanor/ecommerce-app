@@ -61,4 +61,14 @@ describe("Button", () => {
     render(<Button disabled data-testid="b">click</Button>);
     expect(screen.getByTestId("b")).toBeDisabled();
   });
+
+  it("shows a pointer cursor, overriding Tailwind's default-cursor reset on buttons", () => {
+    render(<Button data-testid="b">click</Button>);
+    expect(screen.getByTestId("b")).toHaveClass("cursor-pointer");
+  });
+
+  it("shows a not-allowed cursor when disabled", () => {
+    render(<Button disabled data-testid="b">click</Button>);
+    expect(screen.getByTestId("b")).toHaveClass("disabled:cursor-not-allowed");
+  });
 });

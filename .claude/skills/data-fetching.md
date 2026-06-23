@@ -16,7 +16,7 @@ For Server Components that fetch at request or build time. Supports Next.js cach
 
 ## useFetchQuery
 
-For Client Components that fetch based on runtime state or user interaction. Automatically cancels the in-flight request via AbortController on unmount or URL change. Pass `null` as the URL to skip fetching conditionally.
+For Client Components that fetch based on runtime state or user interaction. Automatically cancels the in-flight request(s) via AbortController on unmount or URL change. Accepts a single URL, an array of URLs to fetch in parallel, or `null` to skip fetching conditionally — the return type follows the input (`T | null` for one URL, `T[] | null` for an array).
 
 ## Why the Split Exists
 

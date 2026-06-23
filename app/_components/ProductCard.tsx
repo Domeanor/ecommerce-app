@@ -9,11 +9,17 @@ import AddToCartControl from "@/components/AddToCartControl";
 
 type ProductCardProps = {
   product: Product;
+  page?: number;
 };
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, page }: ProductCardProps) {
+  const href =
+    page && page > 1
+      ? `/products/${product.id}?page=${page}`
+      : `/products/${product.id}`;
+
   return (
-    <Link href={`/products/${product.id}`} className="group no-underline">
+    <Link href={href} className="group no-underline">
       <Card hoverable className="flex flex-col overflow-hidden h-full">
         <Box className="relative h-48 w-full isolate bg-gray-100">
           <LazyImage
